@@ -10,47 +10,50 @@ public class MovimentHelper : MonoBehaviour
 
     private int _index = 0;
 
+    [SerializeField]
+    private Player player = null;
+
     private void Start()
     {
-        StartCoroutine(StartMovimentCoroutine());
+        initialPosition = transform.position;
     }
 
-    IEnumerator StartMovimentCoroutine()
+    float time = 0;
+    Vector3 initialPosition;
+
+    private void FixedUpdate()
     {
-        float time = 0;
-
-        while (true)
+        if (time < duration)
         {
-            var currentPosition = transform.position;
+            var nextPosition = Vector3.Lerp(initialPosition, positions[_index].transform.position, (time / duration));
 
-            while (time < duration)
+            if (player != null)
             {
-                transform.position = Vector3.Lerp(currentPosition, positions[_index].transform.position, (time / duration));
-
-                time += Time.deltaTime;
-                yield return null;
+                player.AddExternalMovement(nextPosition - transform.position);
             }
 
+            transform.position = nextPosition;
+            time += Time.deltaTime;
+        }
+        else
+        {
             _index++;
-
             if (_index >= positions.Count) _index = 0;
-            time = 0;
 
-            yield return null;
+            time = 0;
+            initialPosition = transform.position;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entrou");
         if (!other.CompareTag("Player")) return;
-        other.transform.parent = transform;
+        player = other.GetComponent<Player>();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Saiu");
         if (!other.CompareTag("Player")) return;
-        other.transform.parent = null;
+        player = null;
     }
 }

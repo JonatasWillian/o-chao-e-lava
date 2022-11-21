@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         vSpeed -= gravit * Time.deltaTime;
         speedVector.y = vSpeed;
 
-        characterController.Move(speedVector * Time.deltaTime);
+        //characterController.Move(speedVector * Time.deltaTime);
 
         animator.SetBool("Run", isWalking);
     }
@@ -81,5 +81,20 @@ public class Player : MonoBehaviour
         {
             transform.position = CheckPointManager.Instance.GetPositionCheckPoint();
         }
+    }
+
+    private Vector3 speedVector;
+
+    private Vector3 externalMovement = Vector3.zero;
+
+    public void AddExternalMovement(Vector3 movement)
+    {
+        externalMovement += movement;
+    }
+
+    private void FixedUpdate()
+    {
+        characterController.Move(speedVector * Time.deltaTime + externalMovement);
+        externalMovement = Vector3.zero;
     }
 }

@@ -114,6 +114,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   duration: 5
+  player: {fileID: 0}
 --- !u!54 &1534000979207513
 Rigidbody:
   m_ObjectHideFlags: 0
