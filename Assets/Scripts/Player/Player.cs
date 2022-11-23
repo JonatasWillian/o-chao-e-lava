@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
 
         var inputAxisVertical = Input.GetAxis("Vertical");
-        var speedVector = transform.forward * inputAxisVertical * speed;
+        speedVector = transform.forward * inputAxisVertical * speed;
 
         if (characterController.isGrounded)
         {
