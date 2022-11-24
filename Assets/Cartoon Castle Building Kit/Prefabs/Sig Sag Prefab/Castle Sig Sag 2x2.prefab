@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 33172899928089710}
   - component: {fileID: 23947931429337512}
   - component: {fileID: 65865912337448358}
-  - component: {fileID: 296033191}
   m_Layer: 0
   m_Name: Castle Sig Sag 2x2
   m_TagString: Untagged
@@ -96,20 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5000001, y: 1.5000026, z: 0.7500059}
   m_Center: {x: 0.00000011920929, y: 0.74999857, z: -0.37500277}
---- !u!114 &296033191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395763866516456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e7059f24bd5d8a49893e6f764020f55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positions:
-  - {fileID: 0}
-  - {fileID: 0}
-  duration: 5
-  player: {fileID: 0}
