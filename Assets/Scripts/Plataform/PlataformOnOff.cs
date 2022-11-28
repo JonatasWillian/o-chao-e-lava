@@ -13,7 +13,6 @@ public class PlataformOnOff : MonoBehaviour
         if (other.transform.CompareTag(tagPlayer))
         {
             StartCoroutine(PlataformCoroutine());
-            //plataformOn.SetActive(true);
         }
     }
 
