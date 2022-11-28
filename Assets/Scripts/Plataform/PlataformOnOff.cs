@@ -16,12 +16,23 @@ public class PlataformOnOff : MonoBehaviour
         }
     }
 
+    /*private void OnTriggerExit(Collider other)
+    {
+        StartCoroutine(PlataformOffCoroutine());
+    }*/
+
     IEnumerator PlataformCoroutine()
     {
         plataformOn.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(5);
 
-        yield return new WaitForSeconds(4);
         plataformOn.SetActive(false);
+        yield return new WaitForEndOfFrame();
+    }
+
+    IEnumerator PlataformOffCoroutine()
+    {
+        plataformOn.SetActive(false);
+        yield return new WaitForEndOfFrame();
     }
 }
