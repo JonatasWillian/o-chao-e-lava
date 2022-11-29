@@ -8,6 +8,34 @@ public class PlataformOnOff : MonoBehaviour
 
     public GameObject plataformOn;
 
+    public bool _disableOnStart = true;
+
+    public float durationPlataform = 5f;
+
+    private Collider[] colliders;
+    private MeshRenderer meshRenderer;
+    private PlataformOnOff plataformOnOff;
+
+    public void Start()
+    {
+        colliders = GetComponents<Collider>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        plataformOnOff = plataformOn.GetComponent<PlataformOnOff>();
+        if (_disableOnStart)
+        {
+            SetPlataformEnable(false);
+        }
+    }
+
+    public void SetPlataformEnable(bool enabled)
+    {
+        for (int i = 0; i < colliders.Length; ++i)
+        {
+            colliders[i].enabled = enabled;
+        }
+        meshRenderer.enabled = enabled;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag(tagPlayer))
@@ -16,23 +44,12 @@ public class PlataformOnOff : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerExit(Collider other)
-    {
-        StartCoroutine(PlataformOffCoroutine());
-    }*/
-
     IEnumerator PlataformCoroutine()
     {
-        plataformOn.SetActive(true);
-        yield return new WaitForSeconds(5);
+        plataformOnOff.SetPlataformEnable(true);
+        yield return new WaitForSeconds(durationPlataform);
 
-        plataformOn.SetActive(false);
-        yield return new WaitForEndOfFrame();
-    }
-
-    IEnumerator PlataformOffCoroutine()
-    {
-        plataformOn.SetActive(false);
+        plataformOnOff.SetPlataformEnable(false);
         yield return new WaitForEndOfFrame();
     }
 }
