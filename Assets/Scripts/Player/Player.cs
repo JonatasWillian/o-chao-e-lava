@@ -15,10 +15,14 @@ public class Player : MonoBehaviour
     public float gravit = -9.8f;
     public float speedRun = 1.5f;
 
-    [Space]
+    [Header("HealthBase")]
     public HealthBase healthBase;
 
-    [Header("Tag")]
+    [Header("Screen")]
+    public GameObject endScreen;
+
+    private string tagTrigger = "End";
+
     private float vSpeed = 0;
     private bool _jumping = false;
 
@@ -69,8 +73,6 @@ public class Player : MonoBehaviour
         vSpeed -= gravit * Time.deltaTime;
         speedVector.y = vSpeed;
 
-        //characterController.Move(speedVector * Time.deltaTime);
-
         animator.SetBool("Run", isWalking);
     }
 
@@ -96,5 +98,14 @@ public class Player : MonoBehaviour
     {
         characterController.Move(speedVector * Time.deltaTime + externalMovement);
         externalMovement = Vector3.zero;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag(tagTrigger))
+        {
+            endScreen.SetActive(true);
+            speed = 0;
+        }
     }
 }
