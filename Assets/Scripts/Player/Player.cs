@@ -25,9 +25,13 @@ public class Player : MonoBehaviour
 
     private float vSpeed = 0;
     private bool _jumping = false;
+    private bool _movementEnable = true;
 
     void Update()
     {
+        if (!_movementEnable)
+            return;
+
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
 
         var inputAxisVertical = Input.GetAxis("Vertical");
@@ -106,6 +110,9 @@ public class Player : MonoBehaviour
         {
             endScreen.SetActive(true);
             speed = 0;
+            speedVector = Vector3.zero;
+            animator.SetBool("Run", false);
+            _movementEnable = false;
         }
     }
 }
