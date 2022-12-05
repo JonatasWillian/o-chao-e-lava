@@ -6,6 +6,7 @@ public class CheckPointBase : MonoBehaviour
 {
     public GameObject particle;
     public int key = 01;
+    public GameObject text;
 
     private bool checkPointActived = false;
     private string checkPointKey = "CheckPointKey";
@@ -32,11 +33,21 @@ public class CheckPointBase : MonoBehaviour
 
     private void SaveCheckPoint()
     {
-        /*if(PlayerPrefs.GetInt(checkPointKey, 0) > key)
-            PlayerPrefs.SetInt(checkPointKey, key);*/
-
         CheckPointManager.Instance.SaveCheckPoint(key);
 
         checkPointActived = true;
+
+        StartCoroutine(CheckPointCoroutine());
+    }
+
+    IEnumerator CheckPointCoroutine()
+    {
+        text.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+
+        yield return new WaitForSeconds(.5f);
+        text.gameObject.SetActive(false);
+
+        //checkPointCoroutine = null;
     }
 }
