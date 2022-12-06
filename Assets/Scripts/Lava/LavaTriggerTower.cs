@@ -10,11 +10,11 @@ public class LavaTriggerTower : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*if (other.transform.CompareTag(compareTag))
+        if (other.transform.CompareTag(compareTag))
         {
             animatorLava.SetTrigger("Lava");
-        }*/
+        }
 
-        animatorLava.SetTrigger("Lava");
+        //animatorLava.SetTrigger("Lava");
     }
 }
