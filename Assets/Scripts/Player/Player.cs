@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 
     [Header("Screen")]
     public GameObject endScreen;
+    public GameObject buttonPause;
 
     private string tagTrigger = "End";
 
@@ -109,10 +110,8 @@ public class Player : MonoBehaviour
         if (other.transform.CompareTag(tagTrigger))
         {
             endScreen.SetActive(true);
-            speed = 0;
-            speedVector = Vector3.zero;
-            animator.SetBool("Run", false);
-            _movementEnable = false;
+            Time.timeScale = 0;
+            buttonPause.SetActive(false);
         }
     }
 }
